@@ -38,8 +38,8 @@ type Ride {
   price: Float!
   distance: String!
   duration: String!
-  passenger: User!
   driver: User!
+  passenger: User!
   createdAt: String!
   updatedAt: String
 }
@@ -63,7 +63,7 @@ type User {
   lastLat: Float
   lastOrientation: Float
   chat: Chat
-  message: [Message]
+  messages: [Message]
   verifications: [Verification]
   ridesAsPassenger: [Ride]
   ridesAsDriver: [Ride]
