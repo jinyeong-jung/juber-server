@@ -6,6 +6,7 @@ import {
 } from "src/types/graph";
 import User from "../../../entities/User";
 import Ride from "../../../entities/Ride";
+import Chat from "../../../entities/Chat";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -20,12 +21,19 @@ const resolvers: Resolvers = {
           try {
             let ride: Ride | undefined;
             if (args.status === "ACCEPTED") {
-              ride = await Ride.findOne({
-                id: args.rideId,
-                status: "REQUESTING"
-              });
+              ride = await Ride.findOne(
+                {
+                  id: args.rideId,
+                  status: "REQUESTING"
+                },
+                { relations: ["passenger"] }
+              );
               if (ride) {
                 (ride.driver = user), (user.isTaken = true), user.save();
+                await Chat.create({
+                  driver: user,
+                  passanger: ride.passenger
+                });
               }
             } else {
               ride = await Ride.findOne({
