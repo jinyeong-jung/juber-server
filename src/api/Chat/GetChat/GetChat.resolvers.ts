@@ -1,7 +1,7 @@
 import Chat from "../../../entities/Chat";
 import User from "../../../entities/User";
-import { GetChatQueryArgs, GetChatResponse } from "src/types/graph";
-import { Resolvers } from "src/types/resolvers";
+import { GetChatQueryArgs, GetChatResponse } from "../../../types/graph";
+import { Resolvers } from "../../../types/resolvers";
 import privateResolver from "../../../utils/privateResolver";
 
 const resolvers: Resolvers = {
@@ -17,7 +17,7 @@ const resolvers: Resolvers = {
             { relations: ["messages"] }
           );
           if (chat) {
-            if (user.id === chat.driverId || user.id === chat.passengerId) {
+            if (chat.passengerId === user.id || chat.driverId === user.id) {
               return {
                 ok: true,
                 error: null,
@@ -33,7 +33,7 @@ const resolvers: Resolvers = {
           } else {
             return {
               ok: false,
-              error: "Chat not found",
+              error: "Not found",
               chat: null
             };
           }

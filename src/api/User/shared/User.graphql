@@ -17,8 +17,8 @@ type User {
   lastLat: Float
   lastOrientation: Float
   fbId: String
-  chatsAsPassenger: [Chat]
   chatsAsDriver: [Chat]
+  chatsAsPassenger: [Chat]
   messages: [Message]
   ridesAsPassenger: [Ride]
   ridesAsDriver: [Ride]

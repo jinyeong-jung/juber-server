@@ -17,9 +17,11 @@ type Chat {
   id: Int!
   messages: [Message]
   passengerId: Int!
-  passanger: User!
+  passenger: User!
   driverId: Int
   driver: User!
+  rideId: Int
+  ride: Ride!
   createdAt: String!
   updatedAt: String
 }
@@ -125,6 +127,8 @@ type Ride {
   driver: User!
   passengerId: Int!
   passenger: User!
+  chat: Chat
+  chatId: Int
   createdAt: String!
   updatedAt: String
 }
@@ -212,8 +216,8 @@ type User {
   lastLat: Float
   lastOrientation: Float
   fbId: String
-  chatsAsPassenger: [Chat]
   chatsAsDriver: [Chat]
+  chatsAsPassenger: [Chat]
   messages: [Message]
   ridesAsPassenger: [Ride]
   ridesAsDriver: [Ride]

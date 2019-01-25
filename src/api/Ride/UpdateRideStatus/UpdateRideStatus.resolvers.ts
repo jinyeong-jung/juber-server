@@ -1,13 +1,12 @@
-import { Resolvers } from "src/types/resolvers";
-import privateResolver from "../../../utils/privateResolver";
+import Chat from "../../../entities/Chat";
+import Ride from "../../../entities/Ride";
+import User from "../../../entities/User";
 import {
   UpdateRideStatusMutationArgs,
   UpdateRideStatusResponse
-} from "src/types/graph";
-import User from "../../../entities/User";
-import Ride from "../../../entities/Ride";
-import Chat from "../../../entities/Chat";
-
+} from "../../../types/graph";
+import { Resolvers } from "../../../types/resolvers";
+import privateResolver from "../../../utils/privateResolver";
 const resolvers: Resolvers = {
   Mutation: {
     UpdateRideStatus: privateResolver(
@@ -29,11 +28,16 @@ const resolvers: Resolvers = {
                 { relations: ["passenger"] }
               );
               if (ride) {
-                (ride.driver = user), (user.isTaken = true), user.save();
-                await Chat.create({
+                ride.driver = user;
+                user.isTaken = true;
+                user.save();
+                const chat = await Chat.create({
                   driver: user,
-                  passanger: ride.passenger
-                });
+                  ride,
+                  passenger: ride.passenger
+                }).save();
+                ride.chat = chat;
+                ride.save();
               }
             } else {
               ride = await Ride.findOne({
@@ -52,7 +56,7 @@ const resolvers: Resolvers = {
             } else {
               return {
                 ok: false,
-                error: "Can't update ride"
+                error: "Cant update ride"
               };
             }
           } catch (error) {
@@ -71,5 +75,4 @@ const resolvers: Resolvers = {
     )
   }
 };
-
 export default resolvers;
