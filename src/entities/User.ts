@@ -71,7 +71,7 @@ class User extends BaseEntity {
   @Column({ type: "text", nullable: true })
   fbId: string;
 
-  @OneToMany(type => Chat, chat => chat.passanger)
+  @OneToMany(type => Chat, chat => chat.passenger)
   chatsAsPassenger: Chat[];
 
   @OneToMany(type => Chat, chat => chat.driver)
