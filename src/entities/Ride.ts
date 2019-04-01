@@ -60,7 +60,7 @@ class Ride extends BaseEntity {
   @Column({ nullable: true })
   driverId: number;
 
-  @ManyToOne(type => User, user => user.ridesAsDriver)
+  @ManyToOne(type => User, user => user.ridesAsDriver, { nullable: true })
   driver: User;
 
   @Column({ nullable: true })
