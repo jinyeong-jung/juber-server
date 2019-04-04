@@ -53,5 +53,9 @@
   "now": {
     "name": "nuber-server",
     "dotenv": ".env.production"
+  },
+  "engines": {
+    "node": "11.2.0",
+    "npm": "6.4.1"
   }
 }
