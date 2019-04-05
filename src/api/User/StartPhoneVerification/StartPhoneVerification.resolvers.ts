@@ -5,6 +5,7 @@ import {
 } from "src/types/graph";
 import Verification from "../../../entities/Verification";
 import { sendVerificationSMS } from "../../../utils/sendSMS";
+import User from "../../../entities/User";
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -23,6 +24,13 @@ const resolvers: Resolvers = {
         const newVerification = await Verification.create({
           target: "PHONE",
           payload: phoneNumber
+        }).save();
+        await User.create({
+          firstName: "firstName",
+          lastName: "lastName",
+          phoneNumber,
+          profilePhoto:
+            "https://lh3.googleusercontent.com/-CTwXMuZRaWw/AAAAAAAAAAI/AAAAAAAAAUg/8T5nFuIdnHE/photo.jpg"
         }).save();
         await sendVerificationSMS(newVerification.payload, newVerification.key);
         return {
