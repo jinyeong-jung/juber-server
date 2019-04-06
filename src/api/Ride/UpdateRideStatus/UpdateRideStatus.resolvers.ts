@@ -34,6 +34,7 @@ const resolvers: Resolvers = {
                 const chat = await Chat.create({
                   driver: user,
                   ride,
+                  rideId: ride.id,
                   passenger: ride.passenger
                 }).save();
                 ride.chat = chat;
@@ -47,7 +48,14 @@ const resolvers: Resolvers = {
                 },
                 { relations: ["passenger", "driver"] }
               );
+              const chat = await Chat.findOne({
+                driver: user,
+                passenger: ride!.passenger
+              });
+              chat!.ride = ride!;
+              chat!.save();
             }
+
             if (ride) {
               ride.status = args.status;
               ride.save();
