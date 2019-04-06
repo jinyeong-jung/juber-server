@@ -2,6 +2,7 @@ type UpdateRideStatusResponse {
   ok: Boolean!
   error: String
   rideId: Int
+  ride: Ride
 }
 
 enum statusOptions {
