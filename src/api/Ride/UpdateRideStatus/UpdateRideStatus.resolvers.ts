@@ -38,7 +38,7 @@ const resolvers: Resolvers = {
                   passenger: ride.passenger
                 }).save();
                 ride.chat = chat;
-                ride.save();
+                await ride.save();
               }
             } else {
               ride = await Ride.findOne(
@@ -52,7 +52,7 @@ const resolvers: Resolvers = {
 
             if (ride) {
               ride.status = args.status;
-              ride.save();
+              await ride.save();
               pubSub.publish("rideUpdate", { RideStatusSubscription: ride });
               return {
                 ok: true,
