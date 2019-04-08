@@ -25,7 +25,7 @@ const resolvers: Resolvers = {
                   id: args.rideId,
                   status: "REQUESTING"
                 },
-                { relations: ["passenger", "driver"] }
+                { relations: ["passenger", "driver", "chat"] }
               );
               if (ride) {
                 ride.driver = user;
@@ -46,14 +46,8 @@ const resolvers: Resolvers = {
                   id: args.rideId,
                   driver: user
                 },
-                { relations: ["passenger", "driver"] }
+                { relations: ["passenger", "driver", "chat"] }
               );
-              const chat = await Chat.findOne({
-                driver: user,
-                passenger: ride!.passenger
-              });
-              chat!.ride = ride!;
-              chat!.save();
             }
 
             if (ride) {
