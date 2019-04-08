@@ -18,7 +18,7 @@ const resolvers: Resolvers = {
             const ride = await Ride.create({ ...args, passenger: user }).save();
             pubSub.publish("rideRequest", { NearbyRideSubscription: ride });
             // user.isRiding = true;
-            user.save();
+            await user.save();
             return {
               ok: true,
               error: null,
