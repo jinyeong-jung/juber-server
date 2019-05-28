@@ -1,6 +1,6 @@
 # juber-server
 
-Server for the (N)Uber Clone Course on Nomad Academy. GraphQL, Typescript, NodeJS
+Server for the (J)Uber Clone Course on Nomad Academy. GraphQL, Typescript, NodeJS
 
 ## Resolvers
 
