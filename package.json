@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
-    "bcrypt": "^3.0.3",
+    "bcrypt": "^5.0.0",
     "class-validator": "^0.9.1",
     "copy": "^0.3.2",
     "cors": "^2.8.5",
